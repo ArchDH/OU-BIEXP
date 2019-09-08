@@ -8,4 +8,4 @@ Python Code Share Board for Base Isolation Research Team of Miyamoto Lab, Osaka 
 データの量があまりに膨大であったため、PythonやC++を用いたデータ分析の簡便化を行いました。
 そのコード集をここに共有します。
 
-This Github Resporitory was created by DONGHA KIM who was a master's student during 2017-2019 at Osaka University, Miyamoto Laboratory. Since the data obtained from shaking table experiments were too inconvinient to analysis, I wrote a bunch of Python codes for better analyting performance. Those codes are shared in this folder. Any questions or advice will be pleasurely accepted.
+This Github Resporitory was created by DONGHA KIM who was a master's student during 2017-2019 at Osaka University, Miyamoto Laboratory. Since the data obtained from numerous shaking table experiments and finite element analyses were too massive and inconvinient structurally to analysis, I wrote a bunch of Python and C++ codes for better data analyzing performance. Any questions or advice will be pleasurely accepted.
