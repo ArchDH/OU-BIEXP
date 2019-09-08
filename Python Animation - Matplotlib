@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+# DONG-HA KIM 2019 AUGUST
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation, ArtistAnimation, writers
+
+# Change a font
+font = {'family': 'Agency FB', 'size': 18}
+plt.rc('font', **font)
+
+# Daishinken Uemachi Earthquake A43C Scenario 1 EW and NS (2010 JSCA)
+ewt, ewa = np.genfromtxt("Earthquake/GM for 2019 DYNA/A43CEW.csv", delimiter=',', skip_header=2, usecols=(0, 1)).T
+ewa = ewa/10
+nst, nsa = np.genfromtxt("Earthquake/GM for 2019 DYNA/A43CNS.csv", delimiter=',', skip_header=2, usecols=(0, 1)).T
+nsa = nsa/10
+
+# Graph
+fig, ax = plt.subplots(nrows=2, ncols=1, figsize=(10, 5), sharex='col')
+
+# ax.plot() returns a tuple with one element. By adding the comma to the assignment target list, you ask Python
+# to unpack the return value and assign it to each variable named to the left in turn.
+# The order of the graph coding lines represents the order of overlapping.
+line_ew_bg, = ax[0].plot([], [], lw=1, color='darkgray')
+line_ew, = ax[0].plot([], [], lw=3, color='C0', label='EW')
+line_ew_point, = ax[0].plot([], [], marker='o', markersize=9, color='r')
+ax[0].set(xlim=(0, time-0.2), ylim=(-1200, 1200),  ylabel='ACC [gal]')
+ax[0].legend(loc=1, frameon=False)
+ax[0].grid(True)
+
+line_ns_bg, = ax[1].plot([], [], lw=1, color='darkgray')
+line_ns, = ax[1].plot([], [], lw=3, color='C1', label='NS')
+line_ns_point, = ax[1].plot([], [], marker='o', markersize=9, color='r')
+ax[1].set(xlim=(0, time-0.2), ylim=(-1200, 1200), xlabel='Time [sec]', ylabel='ACC [gal]')
+ax[1].legend(loc=1, frameon=False)
+ax[1].grid(True)
+
+def init():
+    '''
+    Create an empty plot/frame
+    '''
+    line_ew_bg.set_data(ewt, ewa)
+    line_ns_bg.set_data(nst, nsa)
+    line_ew.set_data([], [])
+    line_ns.set_data([], [])
+    return line_ew, line_ns
+
+
+ew_xdata, ew_ydata = [], []
+ns_xdata, ns_ydata = [], []
+
+
+def animate(i):
+    '''
+    Create an animation
+    '''
+    # appending new points to x, y axes points list
+    ew_xdata.append(ewt[i])
+    ew_ydata.append(ewa[i])
+    line_ew.set_data(ew_xdata, ew_ydata)
+    line_ew_point.set_data(ewt[i], ewa[i])
+
+    ns_xdata.append(nst[i])
+    ns_ydata.append(nsa[i])
+    line_ns.set_data(ns_xdata, ns_ydata)
+    line_ns_point.set_data(nst[i], nsa[i])
+
+    return line_ew, line_ew_point,line_ns, line_ns_point
+
+# interval = ms (0.001)
+dt=0.02
+nframe = int(time*2/dt)
+anim = FuncAnimation(fig, animate, init_func=init, frames=nframe, interval=1e3*dt, blit=True, repeat=False)
+plt.tight_layout()
+plt.show()
+
+# Save the animation as a mp4 file.
+Writer = writers['ffmpeg']
+writer = Writer(fps=30, metadata=dict(artist='Me'), bitrate=1800)
+directory= //PLZ SPECIFY IT//
+anim.save(directory+"EarthquakeAnimation.mp4", writer=writer)
+print("Finished")
