@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Python 3.7 with Anaconda 3 5.0
-# DONG-HA KIM 2019 AUGUST
+# 2019 AUGUST
 
 import numpy as np
 import matplotlib.pyplot as plt
