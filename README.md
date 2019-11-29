@@ -1,7 +1,7 @@
 # OU-BIEXP
 大阪大学宮本研免震実験・解析データ分析用Pythonコード集
 
-Python Code Share Board for Base Isolation Research Team of Miyamoto Lab, Osaka University
+Python Code Share Board for Base Isolation Research Team at Miyamoto Lab, Osaka University
 
 私は2017年から2年間、大阪大学宮本研究室（地震地盤工学研究室）の修士課程に在学していました。
 2年間いろんな有限要素解析や振動台実験を行いましたが、解析ソフトや測定装置から得られた
